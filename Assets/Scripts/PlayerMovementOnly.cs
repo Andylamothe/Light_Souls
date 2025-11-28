@@ -11,8 +11,9 @@ public class PlayerMovementOnly : MonoBehaviour
     public ArmHitDetector armHit;
     private Animator anim;
     private Rigidbody rb;
-
-
+    private bool canAttack = true;
+    private float hitCooldown = 0.5f;
+    private float lastHitTime = 0f;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -36,7 +37,15 @@ public class PlayerMovementOnly : MonoBehaviour
         // Attaques 
         if (Input.GetMouseButtonDown(0))
         {
-            anim.SetTrigger("Attack");
+             // cooldown pour le premier clic de sourie. empeche 2 clic super rapide 
+            
+            Debug.Log(canAttack);
+            // peux attaquer quand l'animation est finie
+            if(canAttack) {
+                anim.SetTrigger("Attack");
+                
+            }
+            
         }
     }
 
@@ -58,13 +67,15 @@ public class PlayerMovementOnly : MonoBehaviour
 
        // 👇 APPELÉES PAR LES EVENTS D’ANIMATION
     public void StartHit()
-    {
-        Debug.Log("StartHit appelé !");
+    {   
+        canAttack = false;
+        
         armHit.EnableHit();
     }
 
     public void StopHit()
     {
+        canAttack = true;
         armHit.DisableHit();
     }
 }

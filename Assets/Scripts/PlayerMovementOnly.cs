@@ -8,7 +8,7 @@ public class PlayerMovementOnly : MonoBehaviour
 
     [Header("References")]
     public Camera playerCamera; // Glisse ta Main Camera ici (pour mouvement relatif)
-
+    public ArmHitDetector armHit;
     private Animator anim;
     private Rigidbody rb;
 
@@ -54,5 +54,17 @@ public class PlayerMovementOnly : MonoBehaviour
 
         move.y = rb.linearVelocity.y; // Garde gravité
         rb.linearVelocity = move;
+    }
+
+       // 👇 APPELÉES PAR LES EVENTS D’ANIMATION
+    public void StartHit()
+    {
+        Debug.Log("StartHit appelé !");
+        armHit.EnableHit();
+    }
+
+    public void StopHit()
+    {
+        armHit.DisableHit();
     }
 }

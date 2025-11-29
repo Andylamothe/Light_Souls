@@ -16,7 +16,10 @@ public class Teleportation : MonoBehaviour
     public Vector3 newScale = Vector3.one;    // Nouvelle échelle du joueur après téléportation
 
     private bool isColliding = false;
-
+    [SerializeField] private GameObject biomeNeige;
+    [SerializeField] private GameObject biomeForest;
+    [SerializeField] private PlayerMovementOnly playerMovementOnly;
+    
     private void OnTriggerEnter(Collider other)
     {
         // Vérifie que c'est un joueur
@@ -53,11 +56,15 @@ public class Teleportation : MonoBehaviour
         // Téléporte le joueur
         if (teleportTarget != null && playerCollider != null)
         {
+            biomeNeige.SetActive(true);
+           
             playerCollider.transform.position = teleportTarget.position;
             playerCollider.transform.rotation = teleportTarget.rotation;
 
             // Change la scale du joueur
             playerCollider.transform.localScale = newScale;
+            playerMovementOnly.walkSpeed = 2.5f;
+            playerMovementOnly.runSpeed = 6;
         }
 
         // Débloque le mouvement si activé
@@ -69,5 +76,11 @@ public class Teleportation : MonoBehaviour
         }
 
         isColliding = false;
+        // desactive la forest a la fin du script
+         biomeForest.SetActive(false);
     }
+}
+
+public class GameObjet
+{
 }

@@ -12,8 +12,7 @@ public class PlayerMovementOnly : MonoBehaviour
     private Animator anim;
     private Rigidbody rb;
     private bool canAttack = true;
-    private float hitCooldown = 0.5f;
-    private float lastHitTime = 0f;
+    
     void Start()
     {
         anim = GetComponent<Animator>();

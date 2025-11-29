@@ -14,7 +14,7 @@ public class ArmHitDetector : MonoBehaviour
         canHit = false;
     }
 
-private float hitCooldown = 1.5f;
+private float hitCooldown = 1f;
 private float lastHitTime = 0f;
 
 private void OnTriggerStay(Collider other)

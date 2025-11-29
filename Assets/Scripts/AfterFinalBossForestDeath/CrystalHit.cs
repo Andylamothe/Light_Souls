@@ -5,7 +5,8 @@ public class CrystalHit : MonoBehaviour
     [Header("Nombre maximum de touches avant désactivation")]
     private int maxHits = 3;
     [SerializeField] private GameObject portal;
-    [SerializeField] private AudioSource audiosource;
+    [SerializeField] private AudioSource audiosourceBreak;
+    [SerializeField] private AudioSource audiosourceHit;
     private int hitCount = 0;
 
     // Appelé depuis un trigger ou une attaque
@@ -13,10 +14,10 @@ public class CrystalHit : MonoBehaviour
     {
         hitCount++;
         Debug.Log($"Cristal touché {hitCount} fois");
-
+        audiosourceHit.Play();
         if (hitCount >= maxHits)
         {
-            audiosource.Play();
+            audiosourceBreak.Play();
             portal.SetActive(true);
             Debug.Log("Cristal désactivé !");
             gameObject.SetActive(false); // Désactive le cristal

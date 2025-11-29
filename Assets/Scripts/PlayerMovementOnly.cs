@@ -12,6 +12,8 @@ public class PlayerMovementOnly : MonoBehaviour
     private Animator anim;
     private Rigidbody rb;
     private bool canAttack = true;
+    private float hitCooldown = 0.2f;
+    private float lastHitTime = 0;
     
     void Start()
     {
@@ -37,12 +39,13 @@ public class PlayerMovementOnly : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
              // cooldown pour le premier clic de sourie. empeche 2 clic super rapide 
-            
-            Debug.Log(canAttack);
+            if (Time.time - lastHitTime < hitCooldown) return; // cooldown
+           
             // peux attaquer quand l'animation est finie
             if(canAttack) {
+
                 anim.SetTrigger("Attack");
-                
+                lastHitTime = Time.time;
             }
             
         }

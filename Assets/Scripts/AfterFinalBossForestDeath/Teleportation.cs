@@ -11,7 +11,7 @@ public class Teleportation : MonoBehaviour
 
     [Header("Paramètres")]
     public float lockDuration = 2f;           // Temps avant que le fade commence
-    public float fadeDuration = 1f;           // Durée du fade
+    public float fadeDuration = 10f;           // Durée du fade
     public bool unlockAfterFade = true;       // Débloquer automatiquement le joueur après téléport
     public Vector3 newScale = Vector3.one;    // Nouvelle échelle du joueur après téléportation
 

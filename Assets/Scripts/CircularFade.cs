@@ -6,7 +6,7 @@ public class CircularFade : MonoBehaviour
 {
     [Header("Références")]
     public Image fadeCircle;      // Image UI du cercle
-    public float fadeDuration = 1f; // Temps pour refermer le cercle
+    public float fadeDuration = 5f; // Temps pour refermer le cercle
 
     // Lance le fade depuis l'extérieur vers le centre
     public void StartFade()

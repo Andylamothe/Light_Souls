@@ -13,11 +13,11 @@ public class TargetColisionPlayer : MonoBehaviour
     private void OnTriggerStay(Collider other)
 {
     
-    Debug.Log("is ");
+    
 
     if (other.CompareTag("Player"))
     {
-        Debug.Log("is player ");
+       
         playerIsInContact = true;
     }
 }

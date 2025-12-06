@@ -2,12 +2,22 @@ using UnityEngine;
 
 public class PlayerMovementOnly : MonoBehaviour
 {
+    [Header("Stats")]
+    public float maxHealth = 100f;
+    private float currentHealth;
+    
+    [Range(0f, 100f)]
+    public float defense = 0f;
+    
+    [Range(0.1f, 5f)]
+    public float speedMultiplier = 1f;
+
     [Header("Movement")]
     public float walkSpeed = 2.5f;
     public float runSpeed = 6f;
 
     [Header("References")]
-    public Camera playerCamera; // Glisse ta Main Camera ici (pour mouvement relatif)
+    public Camera playerCamera;
     public ArmHitDetector armHit;
     private Animator anim;
     private Rigidbody rb;
@@ -19,41 +29,48 @@ public class PlayerMovementOnly : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        currentHealth = maxHealth;
         if (playerCamera == null) playerCamera = Camera.main;
+        
+        // IMPORTANT: Mets le tag "Player" sur ce GameObject
+        gameObject.tag = "Player";
     }
 
     void Update()
     {
+        // Animations
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
         bool running = Input.GetKey(KeyCode.LeftShift);
 
-        // Animation 
         float forwardSpeed = Mathf.Max(0, moveZ);
         float speedValue = forwardSpeed > 0.1f ? (running ? 2f : 1f) : 0f;
         anim.SetFloat("Speed", speedValue);
         anim.SetFloat("Strafe", moveX);
         anim.SetBool("IsRunning", running && moveZ > 0);
 
-        // Attaques 
+        // Attaques
         if (Input.GetMouseButtonDown(0))
         {
-             // cooldown pour le premier clic de sourie. empeche 2 clic super rapide 
-            if (Time.time - lastHitTime < hitCooldown) return; // cooldown
+            if (Time.time - lastHitTime < hitCooldown) return;
            
-            // peux attaquer quand l'animation est finie
-            if(canAttack) {
-
+            if (canAttack)
+            {
                 anim.SetTrigger("Attack");
                 lastHitTime = Time.time;
             }
-            
+        }
+
+        // Debug stats (appuie P)
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log($"Health: {currentHealth}/{maxHealth} | Defense: {defense} | Speed Mult: {speedMultiplier}");
         }
     }
 
     void FixedUpdate()
     {
-        // Mouvement RELATIF À LA CAMÉRA (top pour third person !)
+        // Mouvement relatif à la caméra
         Vector3 camForward = playerCamera.transform.forward;
         Vector3 camRight = playerCamera.transform.right;
         camForward.y = 0; camRight.y = 0;
@@ -61,17 +78,17 @@ public class PlayerMovementOnly : MonoBehaviour
 
         Vector3 move = camForward * Input.GetAxisRaw("Vertical") + camRight * Input.GetAxisRaw("Horizontal");
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) && Input.GetAxisRaw("Vertical") > 0 ? runSpeed : walkSpeed;
+        currentSpeed *= speedMultiplier;
         move = move.normalized * currentSpeed;
 
-        move.y = rb.linearVelocity.y; // Garde gravité
+        move.y = rb.linearVelocity.y;
         rb.linearVelocity = move;
     }
 
-       // 👇 APPELÉES PAR LES EVENTS D’ANIMATION
+    // Animation Events
     public void StartHit()
     {   
         canAttack = false;
-        
         armHit.EnableHit();
     }
 
@@ -79,5 +96,33 @@ public class PlayerMovementOnly : MonoBehaviour
     {
         canAttack = true;
         armHit.DisableHit();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        float realDamage = Mathf.Max(0f, damage - defense);
+        currentHealth -= realDamage;
+        Debug.Log($"Dégâts: {realDamage} | Vie: {currentHealth}/{maxHealth}");
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Joueur mort !");
+        // TODO: Game Over / Respawn / Reload Scene
+        // UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    public void Boost(float healthBoost, float defenseBoost, float speedBoost)
+    {
+        maxHealth += healthBoost;
+        currentHealth += healthBoost;
+        defense += defenseBoost;
+        speedMultiplier += speedBoost;
+        Debug.Log($"Boost ! Vie+{healthBoost} | Def+{defenseBoost} | Vit+{speedBoost}");
     }
 }

@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class ArmHitDetector : MonoBehaviour
 {
+    [Header("Dégâts")]
+    public float damage = 25f;
+    public float hitCooldown = 0.5f;  // Temps minimum entre deux coups (même si tu frappes plusieurs ennemis)
+
+    private float lastHitTime = 0f;
     private bool canHit = false;
-    
+
     public void EnableHit()
     {
         canHit = true;
@@ -14,23 +19,34 @@ public class ArmHitDetector : MonoBehaviour
         canHit = false;
     }
 
-private float hitCooldown = 1f;
-private float lastHitTime = 0f;
-
-private void OnTriggerStay(Collider other)
-{
-    if (!canHit) return;
-    if (Time.time - lastHitTime < hitCooldown) return; // cooldown
-
-    if (other.CompareTag("Target"))
+    private void OnTriggerEnter(Collider other)
     {
-        CrystalHit crystal = other.GetComponent<CrystalHit>();
-        if (crystal != null)
+        // Si l'animation d'attaque n'est pas active → rien
+        if (!canHit) return;
+
+        // Cooldown global pour éviter les hits toutes les frames
+        if (Time.time - lastHitTime < hitCooldown) return;
+
+        EnemyHealth enemy = other.GetComponent<EnemyHealth>();
+        if (enemy != null)
         {
-            crystal.OnHit();
-            lastHitTime = Time.time; // reset cooldown
+            enemy.TakeDamage(damage);
+            lastHitTime = Time.time;   // Un seul coup toutes les "hitCooldown" secondes
+            // → On NE met PLUS "canHit = false;" ici
+            // → Tu peux taper plusieurs ennemis dans la même animation tant que le cooldown le permet
+        }
+
+        // Compatibilité anciens cristaux
+        if (other.CompareTag("Target"))
+        {
+            CrystalHit crystal = other.GetComponent<CrystalHit>();
+            crystal?.OnHit();
         }
     }
-}
 
+    // Réinitialise pour la prochaine attaque (appelé automatiquement à la fin de l’animation)
+    private void OnDisable()
+    {
+        canHit = false;
+    }
 }

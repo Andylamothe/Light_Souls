@@ -5,10 +5,10 @@ public class PlayerMovementOnly : MonoBehaviour
     [Header("Stats")]
     public float maxHealth = 100f;
     private float currentHealth;
-    
+
     [Range(0f, 100f)]
     public float defense = 0f;
-    
+
     [Range(0.1f, 5f)]
     public float speedMultiplier = 1f;
 
@@ -21,23 +21,50 @@ public class PlayerMovementOnly : MonoBehaviour
     public ArmHitDetector armHit;
     private Animator anim;
     private Rigidbody rb;
+    private PlayerRoll playerRoll;
     private bool canAttack = true;
     private float hitCooldown = 0.2f;
     private float lastHitTime = 0;
-    
+
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        playerRoll = GetComponent<PlayerRoll>();
         currentHealth = maxHealth;
         if (playerCamera == null) playerCamera = Camera.main;
-        
+
         // IMPORTANT: Mets le tag "Player" sur ce GameObject
         gameObject.tag = "Player";
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !playerRoll.IsRolling())
+        {
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
+
+            int rollIndex;
+            Vector3 dir;
+
+            if (z > 0) { rollIndex = 0; dir = transform.forward; }
+            else if (z < 0) { rollIndex = 1; dir = -transform.forward; }
+            else if (x < 0) { rollIndex = 2; dir = -transform.right; }
+            else if (x > 0) { rollIndex = 3; dir = transform.right; }
+            else { rollIndex = 0; dir = transform.forward; }
+
+            playerRoll.StartRoll(dir, rollIndex);
+            return;
+        }
+
+        if (playerRoll.IsRolling())
+        {
+            anim.SetFloat("Speed", 0);
+            anim.SetFloat("Strafe", 0);
+            anim.SetBool("IsRunning", false);
+            return;
+        }
         // Animations
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
@@ -53,7 +80,7 @@ public class PlayerMovementOnly : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (Time.time - lastHitTime < hitCooldown) return;
-           
+
             if (canAttack)
             {
                 anim.SetTrigger("Attack");
@@ -71,6 +98,9 @@ public class PlayerMovementOnly : MonoBehaviour
     void FixedUpdate()
     {
         // Mouvement relatif à la caméra
+
+        if (playerRoll.IsRolling()) return;
+
         Vector3 camForward = playerCamera.transform.forward;
         Vector3 camRight = playerCamera.transform.right;
         camForward.y = 0; camRight.y = 0;
@@ -79,15 +109,15 @@ public class PlayerMovementOnly : MonoBehaviour
         Vector3 move = camForward * Input.GetAxisRaw("Vertical") + camRight * Input.GetAxisRaw("Horizontal");
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) && Input.GetAxisRaw("Vertical") > 0 ? runSpeed : walkSpeed;
         currentSpeed *= speedMultiplier;
+        
         move = move.normalized * currentSpeed;
-
         move.y = rb.linearVelocity.y;
         rb.linearVelocity = move;
     }
 
     // Animation Events
     public void StartHit()
-    {   
+    {
         canAttack = false;
         armHit.EnableHit();
     }

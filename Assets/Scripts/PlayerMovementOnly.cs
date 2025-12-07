@@ -40,6 +40,9 @@ public class PlayerMovementOnly : MonoBehaviour
 
     void Update()
     {
+        float mouseX = Input.GetAxis("Mouse X");
+        transform.Rotate(Vector3.up * mouseX * 5f);
+
         if (Input.GetKeyDown(KeyCode.LeftControl) && !playerRoll.IsRolling())
         {
             float x = Input.GetAxisRaw("Horizontal");

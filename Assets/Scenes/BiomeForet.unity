@@ -13015,6 +13015,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2263223308417383979, guid: ac92516589260ad44926bd87b7566b79, type: 3}
   m_PrefabInstance: {fileID: 44722697161007804}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &513184183 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 7872936509228764853, guid: ac92516589260ad44926bd87b7566b79, type: 3}
+  m_PrefabInstance: {fileID: 44722697161007804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &513184185 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2263223308417383976, guid: ac92516589260ad44926bd87b7566b79, type: 3}
+  m_PrefabInstance: {fileID: 44722697161007804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &513184186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13027,8 +13037,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308f4671b8680584cb1886aee981f5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRoll
-  anim: {fileID: 0}
-  rb: {fileID: 0}
+  anim: {fileID: 513184185}
+  rb: {fileID: 513184183}
   rollForce: 10
   rollDuration: 0.45
 --- !u!1 &515654777
@@ -35860,17 +35870,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1015335892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5466516e3a2669340ab71ec10cab06a9, type: 3}
+  m_Script: {fileID: 11500000, guid: db0102b580f8c6749834dab49e8de3f4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraThirdPerson
+  m_EditorClassIdentifier: Assembly-CSharp::CameraThirdPersonV2
   target: {fileID: 405853130}
-  mouseSensitivity: 2
-  distance: 5
+  targetOffset: {x: 0, y: 1.5, z: 0}
+  mouseSensitivityY: 2
   pitchLimits: {x: -40, y: 60}
-  followSpeed: 10
+  distance: 5
   clipMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  collisionRadius: 0.25
+  collisionOffset: 0.15
 --- !u!1001 &1017492188
 PrefabInstance:
   m_ObjectHideFlags: 0

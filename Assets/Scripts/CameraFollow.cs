@@ -13,12 +13,12 @@ public class CameraThirdPerson : MonoBehaviour
     public LayerMask clipMask = -1; // Pour éviter les murs
 
     private float pitch = 0f;
-    private Vector3 offset;
+    // private Vector3 offset;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        offset = transform.localPosition;
+        // offset = transform.localPosition;
     }
 
     void LateUpdate()
@@ -30,11 +30,14 @@ public class CameraThirdPerson : MonoBehaviour
         pitch = Mathf.Clamp(pitch, pitchLimits.x, pitchLimits.y);
 
         // Mouse X : Rotation joueur horizontal
-        target.Rotate(Vector3.up, Input.GetAxis("Mouse X") * mouseSensitivity);
+        float yaw = Input.GetAxis("Mouse X") * mouseSensitivity;
+        transform.RotateAround(target.position + Vector3.up * 1.5f, Vector3.up, yaw);
+
 
         // Position idéale caméra
         Quaternion rotation = Quaternion.Euler(pitch, target.eulerAngles.y, 0);
-        Vector3 idealPos = target.position - rotation * Vector3.forward * distance + Vector3.up * 1.5f;
+        // Vector3 idealPos = target.position - rotation * Vector3.forward * distance + Vector3.up * 1.5f;
+        Vector3 idealPos = target.position + Vector3.up * 1.5f - rotation * Vector3.forward * distance;
 
         // Évite les murs (raycast)
         if (Physics.Linecast(target.position + Vector3.up * 1.5f, idealPos, out RaycastHit hit, clipMask))

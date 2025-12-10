@@ -26,6 +26,7 @@ public class PlayerMovementOnly : MonoBehaviour
     private float hitCooldown = 0.2f;
     private float lastHitTime = 0;
 
+    [SerializeField] private AudioSource swordSwignClip;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -82,12 +83,21 @@ public class PlayerMovementOnly : MonoBehaviour
         // Attaques
         if (Input.GetMouseButtonDown(0))
         {
+            
             if (Time.time - lastHitTime < hitCooldown) return;
 
+            Debug.Log(Time.time - lastHitTime);
+            if (Time.time - lastHitTime > hitCooldown)
+            {
+                canAttack = true;
+            }
             if (canAttack)
             {
-                anim.SetTrigger("Attack");
                 lastHitTime = Time.time;
+                armHit.EnableHit();
+                swordSwignClip.Play();
+                anim.SetTrigger("Attack");
+
             }
         }
 
@@ -122,7 +132,7 @@ public class PlayerMovementOnly : MonoBehaviour
     public void StartHit()
     {
         canAttack = false;
-        armHit.EnableHit();
+        
     }
 
     public void StopHit()

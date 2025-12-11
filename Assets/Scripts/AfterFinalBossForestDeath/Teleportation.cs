@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Teleportation : MonoBehaviour
 {
+
     [Header("Références")]
     public AudioSource audioSource;           // Son à jouer lors de la collision
     public CircularFade circularFade;         // Script pour le cercle fade
@@ -14,7 +15,7 @@ public class Teleportation : MonoBehaviour
     public float fadeDuration = 10f;           // Durée du fade
     public bool unlockAfterFade = true;       // Débloquer automatiquement le joueur après téléport
     public Vector3 newScale = Vector3.one;    // Nouvelle échelle du joueur après téléportation
-
+    // public CameraThirdPersonV2 cameraThirdPersonV2;
     private bool isColliding = false;
     [SerializeField] private GameObject biomeNeige;
     [SerializeField] private GameObject biomeForest;
@@ -57,7 +58,7 @@ public class Teleportation : MonoBehaviour
         if (teleportTarget != null && playerCollider != null)
         {
             biomeNeige.SetActive(true);
-           
+
             playerCollider.transform.position = teleportTarget.position;
             playerCollider.transform.rotation = teleportTarget.rotation;
 
@@ -65,6 +66,7 @@ public class Teleportation : MonoBehaviour
             playerCollider.transform.localScale = newScale;
             playerMovementOnly.walkSpeed = 2.5f;
             playerMovementOnly.runSpeed = 6;
+            // cameraThirdPersonV2.distance = 3f; 
         }
 
         // Débloque le mouvement si activé

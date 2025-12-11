@@ -14,16 +14,14 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        Rigidbody enemyRb = GetComponent<Rigidbody>();
-        if (enemyRb != null)
-        {
-            enemyRb.isKinematic = true;
-        }
+        
     }
 
     public void TakeDamage(float damage)
     {
+        Debug.Log(damage);
         currentHealth -= damage;
+        Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
             Die();
@@ -38,6 +36,6 @@ public class EnemyHealth : MonoBehaviour
         {
             player.Boost(healthBoost, defenseBoost, speedBoost);
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

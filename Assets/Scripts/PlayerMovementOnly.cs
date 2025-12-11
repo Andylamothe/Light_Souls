@@ -26,7 +26,7 @@ public class PlayerMovementOnly : MonoBehaviour
     private float hitCooldown = 0.2f;
     private float lastHitTime = 0;
     public HealthBar healthBar;
-
+    [SerializeField] private ResetGame resetGame;
     [SerializeField] private AudioSource swordSwignClip;
     void Start()
     {
@@ -95,10 +95,10 @@ public class PlayerMovementOnly : MonoBehaviour
         // Attaques
         if (Input.GetMouseButtonDown(0))
         {
-            
+
             if (Time.time - lastHitTime < hitCooldown) return;
 
-            Debug.Log(Time.time - lastHitTime);
+            
             if (Time.time - lastHitTime > hitCooldown)
             {
                 canAttack = true;
@@ -140,7 +140,7 @@ public class PlayerMovementOnly : MonoBehaviour
         Vector3 move = camForward * Input.GetAxisRaw("Vertical") + camRight * Input.GetAxisRaw("Horizontal");
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) && Input.GetAxisRaw("Vertical") > 0 ? runSpeed : walkSpeed;
         currentSpeed *= speedMultiplier;
-        
+
         move = move.normalized * currentSpeed;
         move.y = rb.linearVelocity.y;
         rb.linearVelocity = move;
@@ -150,7 +150,7 @@ public class PlayerMovementOnly : MonoBehaviour
     public void StartHit()
     {
         canAttack = false;
-        
+
     }
 
     public void StopHit()
@@ -163,7 +163,7 @@ public class PlayerMovementOnly : MonoBehaviour
     {
         float realDamage = Mathf.Max(0f, damage - defense);
         currentHealth -= realDamage;
-        
+
         if (healthBar != null)
         {
             healthBar.SetHealth((int)currentHealth);
@@ -172,7 +172,7 @@ public class PlayerMovementOnly : MonoBehaviour
         {
             Debug.LogError("HealthBar n'est pas assigné! Assignez-le dans l'Inspector du Player.");
         }
-        
+
         Debug.Log($"Dégâts: {realDamage} | Vie: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0)
@@ -184,8 +184,9 @@ public class PlayerMovementOnly : MonoBehaviour
     private void Die()
     {
         Debug.Log("Joueur mort !");
-        // TODO: Game Over / Respawn / Reload Scene
-        // UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        resetGame.ResetAllEnemies();
+        resetGame.resetPlayerStat();
+        transform.position = Checkpoint.lastCheckpointPosition;
     }
 
     public void Boost(float healthBoost, float defenseBoost, float speedBoost)
@@ -196,4 +197,9 @@ public class PlayerMovementOnly : MonoBehaviour
         speedMultiplier += speedBoost;
         Debug.Log($"Boost ! Vie+{healthBoost} | Def+{defenseBoost} | Vit+{speedBoost}");
     }
+    public void setCurrantHealth(float currentHealth)
+    {
+        this.currentHealth = currentHealth;
+    }
+    
 }

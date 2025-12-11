@@ -33,6 +33,7 @@ public class EnemyHealthBoss : MonoBehaviour
         {
             player.Boost(healthBoost, defenseBoost, speedBoost);
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+       
     }
 }

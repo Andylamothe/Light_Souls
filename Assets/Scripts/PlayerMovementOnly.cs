@@ -25,6 +25,7 @@ public class PlayerMovementOnly : MonoBehaviour
     private bool canAttack = true;
     private float hitCooldown = 0.2f;
     private float lastHitTime = 0;
+    public HealthBar healthBar;
 
     [SerializeField] private AudioSource swordSwignClip;
     void Start()
@@ -34,6 +35,17 @@ public class PlayerMovementOnly : MonoBehaviour
         playerRoll = GetComponent<PlayerRoll>();
         currentHealth = maxHealth;
         if (playerCamera == null) playerCamera = Camera.main;
+
+        // Initialiser la barre de vie
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth((int)maxHealth);
+            Debug.Log("HealthBar initialisée!");
+        }
+        else
+        {
+            Debug.LogError("HealthBar n'est pas assigné dans l'Inspector!");
+        }
 
         // IMPORTANT: Mets le tag "Player" sur ce GameObject
         gameObject.tag = "Player";
@@ -106,6 +118,12 @@ public class PlayerMovementOnly : MonoBehaviour
         {
             Debug.Log($"Health: {currentHealth}/{maxHealth} | Defense: {defense} | Speed Mult: {speedMultiplier}");
         }
+
+        // Test dégâts (appuie Space)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(10f);
+        }
     }
 
     void FixedUpdate()
@@ -145,6 +163,16 @@ public class PlayerMovementOnly : MonoBehaviour
     {
         float realDamage = Mathf.Max(0f, damage - defense);
         currentHealth -= realDamage;
+        
+        if (healthBar != null)
+        {
+            healthBar.SetHealth((int)currentHealth);
+        }
+        else
+        {
+            Debug.LogError("HealthBar n'est pas assigné! Assignez-le dans l'Inspector du Player.");
+        }
+        
         Debug.Log($"Dégâts: {realDamage} | Vie: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0)

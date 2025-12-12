@@ -24,24 +24,24 @@ public class PlayerMovementOnly : MonoBehaviour
     private Rigidbody rb;
     private PlayerRoll playerRoll;
     private bool canAttack = true;
-    private float hitCooldown = 0.2f;
+    private float hitCooldown = 1f;
     private float lastHitTime = 0;
     public HealthBar healthBar;
     [SerializeField] private ResetGame resetGame;
     [SerializeField] private AudioSource swordSwignClip;
-
+    public GameObject defaultSpawn;
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         playerRoll = GetComponent<PlayerRoll>();
-        
+
         // Si on revient d'une mort, respawn au checkpoint
-        if (Checkpoint.lastCheckpointPosition != Vector3.zero)
-        {
-            transform.position = Checkpoint.lastCheckpointPosition;
-        }
-        
+        // if (Checkpoint.lastCheckpointPosition != Vector3.zero)
+        // {
+        //     transform.position = Checkpoint.lastCheckpointPosition;
+        // }
+        transform.position = defaultSpawn.transform.position;
         currentHealth = maxHealth;
         if (playerCamera == null) playerCamera = Camera.main;
 
@@ -102,13 +102,12 @@ public class PlayerMovementOnly : MonoBehaviour
         {
             if (Time.time - lastHitTime < hitCooldown) return;
 
-            if (canAttack)
-            {
+            
                 lastHitTime = Time.time;
                 armHit.EnableHit();
                 swordSwignClip.Play();
                 anim.SetTrigger("Attack");
-            }
+            
         }
 
         // Debug stats
@@ -182,7 +181,7 @@ public class PlayerMovementOnly : MonoBehaviour
         healthBar?.SetHealth(currentHealth);
         
         // Charger la scène de défaite
-        SceneManager.LoadScene("LosingScene");
+        // SceneManager.LoadScene("LosingScene");
     }
 
     // Boost après kill

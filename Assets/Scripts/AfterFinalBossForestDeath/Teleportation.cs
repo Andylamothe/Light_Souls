@@ -20,6 +20,7 @@ public class Teleportation : MonoBehaviour
     [SerializeField] private GameObject biomeNeige;
     [SerializeField] private GameObject biomeForest;
     [SerializeField] private PlayerMovementOnly playerMovementOnly;
+    [SerializeField] private CameraThirdPersonV2 cameraThirdPersonV2;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -75,6 +76,7 @@ public class Teleportation : MonoBehaviour
             PlayerMovementOnly movement = playerCollider.GetComponent<PlayerMovementOnly>();
             if (movement != null)
                 movement.enabled = true;
+            cameraThirdPersonV2.distance = 3;
         }
 
         isColliding = false;

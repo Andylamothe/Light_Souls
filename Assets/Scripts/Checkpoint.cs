@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public static Vector3 lastCheckpointPosition; // Position du dernier checkpoint
+    public static Vector3 lastCheckpointPosition;
     
     // On initialise la position de checkpoint
     void Start()

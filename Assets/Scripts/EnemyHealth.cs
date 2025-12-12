@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class EnemyHealth : MonoBehaviour
         if (player)
         {
             player.Boost(healthBoost, defenseBoost, speedBoost);
+        }
+        Debug.Log(gameObject.name);
+        if (gameObject.name == "bossFinal")
+        {
+            SceneManager.LoadScene("VictoryScene");
         }
         gameObject.SetActive(false);
     }

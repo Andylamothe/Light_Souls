@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovementOnly : MonoBehaviour
 {
@@ -34,14 +35,21 @@ public class PlayerMovementOnly : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         playerRoll = GetComponent<PlayerRoll>();
+        
+        // Si on revient d'une mort, respawn au checkpoint
+        if (Checkpoint.lastCheckpointPosition != Vector3.zero)
+        {
+            transform.position = Checkpoint.lastCheckpointPosition;
+        }
+        
         currentHealth = maxHealth;
         if (playerCamera == null) playerCamera = Camera.main;
 
         // Initialisation propre de la barre de vie (compatible float + boost)
         if (healthBar != null)
         {
-            healthBar.SetMaxHealth(maxHealth);
-            healthBar.SetHealth(currentHealth);
+            healthBar.SetMaxHealth((int)maxHealth);
+            healthBar.SetHealth((int)currentHealth);
         }
 
         gameObject.tag = "Player";
@@ -172,6 +180,9 @@ public class PlayerMovementOnly : MonoBehaviour
         currentHealth = maxHealth;
         healthBar?.SetMaxHealth(maxHealth);
         healthBar?.SetHealth(currentHealth);
+        
+        // Charger la scène de défaite
+        SceneManager.LoadScene("LosingScene");
     }
 
     // Boost après kill

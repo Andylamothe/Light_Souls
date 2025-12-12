@@ -7,7 +7,22 @@ public class MenuInitializer : MonoBehaviour
 
     void Start()
     {
-        mainMenu.SetActive(true);     // Toujours visible au début
-        optionsMenu.SetActive(false); // Toujours caché au début
+        if (mainMenu != null)
+        {
+            mainMenu.SetActive(true);     // Toujours visible au début
+        }
+        else
+        {
+            Debug.LogError("Main Menu GameObject n'est pas assigné!");
+        }
+
+        if (optionsMenu != null)
+        {
+            optionsMenu.SetActive(false); // Toujours caché au début
+        }
+        else
+        {
+            Debug.LogWarning("Options Menu GameObject n'est pas assigné!");
+        }
     }
 }

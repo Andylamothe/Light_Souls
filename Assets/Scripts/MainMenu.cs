@@ -6,14 +6,29 @@ using System.Collections.Generic;
 
 public class MainMenu : MonoBehaviour
 {
+    public SceneLoader sceneLoader;
+
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (sceneLoader != null)
+        {
+            sceneLoader.LoadScene("BiomeForet");
+        }
+        else
+        {
+            SceneManager.LoadScene("BiomeForet");
+        }
     }
 
     public void QuitGame()
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void RestartFromCheckpoint()
+    {
+        // Recharger la scène actuelle pour respawn au checkpoint
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

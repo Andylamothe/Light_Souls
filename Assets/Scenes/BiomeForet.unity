@@ -10260,6 +10260,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1845742921716089003, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1309248768}
+    - targetCorrespondingSourceObject: {fileID: 1845742921716089003, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1309248769}
   m_SourcePrefab: {fileID: 100100000, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
 --- !u!4 &211453600 stripped
 Transform:
@@ -10511,6 +10514,20 @@ MonoBehaviour:
   healthBoost: 5
   defenseBoost: 0.5
   speedBoost: 0.05
+--- !u!114 &234187873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234187864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1001 &238657320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12740,6 +12757,7 @@ GameObject:
   - component: {fileID: 438041788}
   - component: {fileID: 438041787}
   - component: {fileID: 438041786}
+  - component: {fileID: 438041789}
   m_Layer: 0
   m_Name: goblin1spawn
   m_TagString: Untagged
@@ -12839,6 +12857,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438041784}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &438041789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438041784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1001 &442715486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13048,6 +13080,7 @@ GameObject:
   - component: {fileID: 451814243}
   - component: {fileID: 451814242}
   - component: {fileID: 451814241}
+  - component: {fileID: 451814244}
   m_Layer: 0
   m_Name: goblin1spawn (1)
   m_TagString: Untagged
@@ -13147,6 +13180,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451814239}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &451814244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451814239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1001 &453402145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13529,6 +13576,7 @@ GameObject:
   - component: {fileID: 487932829}
   - component: {fileID: 487932828}
   - component: {fileID: 487932827}
+  - component: {fileID: 487932830}
   m_Layer: 0
   m_Name: bossNeigeSpawn
   m_TagString: Untagged
@@ -13628,6 +13676,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487932825}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &487932830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487932825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1001 &491082867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14613,6 +14675,20 @@ MonoBehaviour:
   healthBoost: 5
   defenseBoost: 0.5
   speedBoost: 0.05
+--- !u!114 &557609806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557609797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1001 &562896402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15837,6 +15913,7 @@ GameObject:
   - component: {fileID: 664426759}
   - component: {fileID: 664426758}
   - component: {fileID: 664426757}
+  - component: {fileID: 664426760}
   m_Layer: 0
   m_Name: sofisticatedGoblinSpawn (2)
   m_TagString: Untagged
@@ -15936,6 +16013,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664426755}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &664426760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664426755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1 &669984456
 GameObject:
   m_ObjectHideFlags: 0
@@ -25679,6 +25770,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1705849404070370923, guid: 3af956640595c6e4cb9436f0f4545ffd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 942230316}
+    - targetCorrespondingSourceObject: {fileID: 1705849404070370923, guid: 3af956640595c6e4cb9436f0f4545ffd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 942230317}
     - targetCorrespondingSourceObject: {fileID: 5663510920080928669, guid: 3af956640595c6e4cb9436f0f4545ffd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 345316868}
@@ -26257,6 +26351,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &794383199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794383189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1001 &805892950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28359,6 +28467,20 @@ MonoBehaviour:
   healthBoost: 5
   defenseBoost: 0.5
   speedBoost: 0.05
+--- !u!114 &942230317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942230303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1 &947408251
 GameObject:
   m_ObjectHideFlags: 0
@@ -37781,6 +37903,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1264443996888144, guid: e57ff2a222c0ed44ea41cc22b40f0b81, type: 3}
       insertIndex: -1
       addedObject: {fileID: 234187872}
+    - targetCorrespondingSourceObject: {fileID: 1264443996888144, guid: e57ff2a222c0ed44ea41cc22b40f0b81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 234187873}
   m_SourcePrefab: {fileID: 100100000, guid: e57ff2a222c0ed44ea41cc22b40f0b81, type: 3}
 --- !u!1001 &1158271262
 PrefabInstance:
@@ -38460,6 +38585,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1845742921716089003, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 794383198}
+    - targetCorrespondingSourceObject: {fileID: 1845742921716089003, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 794383199}
   m_SourcePrefab: {fileID: 100100000, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
 --- !u!1 &1247342393
 GameObject:
@@ -39340,6 +39468,20 @@ MonoBehaviour:
   healthBoost: 5
   defenseBoost: 0.5
   speedBoost: 0.05
+--- !u!114 &1304612048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304612039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1 &1309248760 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1845742921716089003, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
@@ -39444,6 +39586,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1309248769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309248760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!4 &1319093057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5182199918533220257, guid: 22f72f122dfecfe41bc301f345b57a5d, type: 3}
@@ -40696,14 +40852,28 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
-  m_Height: 1
+  m_Height: 2.4426413
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.22132063, z: 0}
+--- !u!114 &1518311894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518311884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1 &1527286826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9103253827345626787, guid: bd265264f7411bb489e368b59c01b3da, type: 3}
@@ -40783,6 +40953,7 @@ GameObject:
   - component: {fileID: 1529308780}
   - component: {fileID: 1529308779}
   - component: {fileID: 1529308778}
+  - component: {fileID: 1529308781}
   m_Layer: 0
   m_Name: sofisticatedGoblinSpawn (1)
   m_TagString: Untagged
@@ -40882,6 +41053,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529308776}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1529308781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529308776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1001 &1559973775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42209,6 +42394,7 @@ GameObject:
   - component: {fileID: 1752728308}
   - component: {fileID: 1752728307}
   - component: {fileID: 1752728306}
+  - component: {fileID: 1752728309}
   m_Layer: 0
   m_Name: goblin1spawn (2)
   m_TagString: Untagged
@@ -42308,6 +42494,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752728304}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1752728309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752728304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!4 &1754621720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 582033263591277032, guid: 7cd1504d167e4724eb33f762e81ccb5a, type: 3}
@@ -43726,6 +43926,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1264443996888144, guid: e57ff2a222c0ed44ea41cc22b40f0b81, type: 3}
       insertIndex: -1
       addedObject: {fileID: 557609805}
+    - targetCorrespondingSourceObject: {fileID: 1264443996888144, guid: e57ff2a222c0ed44ea41cc22b40f0b81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 557609806}
   m_SourcePrefab: {fileID: 100100000, guid: e57ff2a222c0ed44ea41cc22b40f0b81, type: 3}
 --- !u!1001 &1887669354
 PrefabInstance:
@@ -44310,6 +44513,7 @@ GameObject:
   - component: {fileID: 1942242929}
   - component: {fileID: 1942242928}
   - component: {fileID: 1942242927}
+  - component: {fileID: 1942242930}
   m_Layer: 0
   m_Name: sofisticatedGoblinSpawn
   m_TagString: Untagged
@@ -44409,6 +44613,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942242925}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1942242930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942242925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239ef977fe5f0d48b363093ee29184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
+  damage: 10
+  attackDelay: 1.5
 --- !u!1001 &1953282062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45011,6 +45229,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1264443996888144, guid: e57ff2a222c0ed44ea41cc22b40f0b81, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1304612047}
+    - targetCorrespondingSourceObject: {fileID: 1264443996888144, guid: e57ff2a222c0ed44ea41cc22b40f0b81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1304612048}
   m_SourcePrefab: {fileID: 100100000, guid: e57ff2a222c0ed44ea41cc22b40f0b81, type: 3}
 --- !u!1 &2008862421
 GameObject:
@@ -45357,6 +45578,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1845742921716089003, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1518311893}
+    - targetCorrespondingSourceObject: {fileID: 1845742921716089003, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1518311894}
   m_SourcePrefab: {fileID: 100100000, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
 --- !u!1 &2049395364 stripped
 GameObject:
@@ -46056,15 +46280,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2263223308417383977, guid: ac92516589260ad44926bd87b7566b79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 488.56317
+      value: 355.35077
       objectReference: {fileID: 0}
     - target: {fileID: 2263223308417383977, guid: ac92516589260ad44926bd87b7566b79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 34.323883
+      value: 30.68
       objectReference: {fileID: 0}
     - target: {fileID: 2263223308417383977, guid: ac92516589260ad44926bd87b7566b79, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 833.9704
+      value: 174.71234
       objectReference: {fileID: 0}
     - target: {fileID: 2263223308417383977, guid: ac92516589260ad44926bd87b7566b79, type: 3}
       propertyPath: m_LocalRotation.w

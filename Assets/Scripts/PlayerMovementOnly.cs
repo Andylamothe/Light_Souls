@@ -28,6 +28,7 @@ public class PlayerMovementOnly : MonoBehaviour
     public HealthBar healthBar;
     [SerializeField] private ResetGame resetGame;
     [SerializeField] private AudioSource swordSwignClip;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -36,18 +37,13 @@ public class PlayerMovementOnly : MonoBehaviour
         currentHealth = maxHealth;
         if (playerCamera == null) playerCamera = Camera.main;
 
-        // Initialiser la barre de vie
+        // Initialisation propre de la barre de vie (compatible float + boost)
         if (healthBar != null)
         {
-            healthBar.SetMaxHealth((int)maxHealth);
-            Debug.Log("HealthBar initialisée!");
-        }
-        else
-        {
-            Debug.LogError("HealthBar n'est pas assigné dans l'Inspector!");
+            healthBar.SetMaxHealth(maxHealth);
+            healthBar.SetHealth(currentHealth);
         }
 
-        // IMPORTANT: Mets le tag "Player" sur ce GameObject
         gameObject.tag = "Player";
     }
 
@@ -81,6 +77,7 @@ public class PlayerMovementOnly : MonoBehaviour
             anim.SetBool("IsRunning", false);
             return;
         }
+
         // Animations
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
@@ -95,31 +92,24 @@ public class PlayerMovementOnly : MonoBehaviour
         // Attaques
         if (Input.GetMouseButtonDown(0))
         {
-
             if (Time.time - lastHitTime < hitCooldown) return;
 
-            
-            if (Time.time - lastHitTime > hitCooldown)
-            {
-                canAttack = true;
-            }
             if (canAttack)
             {
                 lastHitTime = Time.time;
                 armHit.EnableHit();
                 swordSwignClip.Play();
                 anim.SetTrigger("Attack");
-
             }
         }
 
-        // Debug stats (appuie P)
+        // Debug stats
         if (Input.GetKeyDown(KeyCode.P))
         {
             Debug.Log($"Health: {currentHealth}/{maxHealth} | Defense: {defense} | Speed Mult: {speedMultiplier}");
         }
 
-        // Test dégâts (appuie Space)
+        // Test dégâts (Space)
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(10f);
@@ -128,8 +118,6 @@ public class PlayerMovementOnly : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Mouvement relatif à la caméra
-
         if (playerRoll.IsRolling()) return;
 
         Vector3 camForward = playerCamera.transform.forward;
@@ -150,7 +138,6 @@ public class PlayerMovementOnly : MonoBehaviour
     public void StartHit()
     {
         canAttack = false;
-
     }
 
     public void StopHit()
@@ -159,19 +146,14 @@ public class PlayerMovementOnly : MonoBehaviour
         armHit.DisableHit();
     }
 
+    // Dégâts reçus (appelé par les ennemis)
     public void TakeDamage(float damage)
     {
         float realDamage = Mathf.Max(0f, damage - defense);
         currentHealth -= realDamage;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-        if (healthBar != null)
-        {
-            healthBar.SetHealth((int)currentHealth);
-        }
-        else
-        {
-            Debug.LogError("HealthBar n'est pas assigné! Assignez-le dans l'Inspector du Player.");
-        }
+        healthBar?.SetHealth(currentHealth);
 
         Debug.Log($"Dégâts: {realDamage} | Vie: {currentHealth}/{maxHealth}");
 
@@ -187,19 +169,29 @@ public class PlayerMovementOnly : MonoBehaviour
         resetGame.ResetAllEnemies();
         resetGame.resetPlayerStat();
         transform.position = Checkpoint.lastCheckpointPosition;
+        currentHealth = maxHealth;
+        healthBar?.SetMaxHealth(maxHealth);
+        healthBar?.SetHealth(currentHealth);
     }
 
+    // Boost après kill
     public void Boost(float healthBoost, float defenseBoost, float speedBoost)
     {
         maxHealth += healthBoost;
         currentHealth += healthBoost;
         defense += defenseBoost;
         speedMultiplier += speedBoost;
+
+        healthBar?.SetMaxHealth(maxHealth);
+        healthBar?.SetHealth(currentHealth);
+
         Debug.Log($"Boost ! Vie+{healthBoost} | Def+{defenseBoost} | Vit+{speedBoost}");
     }
-    public void setCurrantHealth(float currentHealth)
+
+    public void setCurrantHealth(float value)
     {
-        this.currentHealth = currentHealth;
+        currentHealth = value;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        healthBar?.SetHealth(currentHealth);
     }
-    
 }
